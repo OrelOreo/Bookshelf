@@ -6,7 +6,7 @@ See all the books that you and others users added
 
 `docker-compose up`
 
-## Technologies
+## TECHNOLOGIES
 - JS
 - Typescript
 - Tailwind
@@ -20,6 +20,6 @@ Unit tests
 
 `docker-compose -f docker-compose.api-server.test.yml up`
 
-## Author
+## AUTHOR
 
 OrelOreo
