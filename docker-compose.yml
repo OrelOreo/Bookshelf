@@ -1,0 +1,28 @@
+version: '3.8'
+services:
+  mongo:
+    image: mongo:4.2
+  api-server: 
+    build: ./api-server
+    restart: always
+    volumes:
+      - $PWD/api-server:/app
+    ports:
+      - 3001:3000
+    environment:
+      - MONGO_URL=${MONGO_URL}
+    depends_on:
+      - mongo 
+  app: 
+    build: ./app
+    restart: always
+    volumes:
+      - $PWD/app:/frontend
+    ports:
+      - 24678:24678
+      - 3000:3000
+    environment: 
+      - API_SERVER_URL=http://localhost:3001
+      - APP_URL=http://localhost
+    depends_on:
+      - mongo 

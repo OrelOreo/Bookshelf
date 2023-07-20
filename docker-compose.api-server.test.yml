@@ -1,0 +1,17 @@
+version: '2'
+
+services:
+  mongo-test:
+    image: mongo:4.0
+    logging:
+      driver: none
+  api-server-test:
+    build: ./api-server
+    command: npm run test
+    volumes:
+      - $PWD/api-server:/app
+    environment:
+      - SECRET_TOKEN=toto4t4g
+      - NODE_ENV=test
+      - PORT=4000
+      - MONGO_URL=mongodb://mongo-test:27017/bookshelf

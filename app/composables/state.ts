@@ -1,0 +1,1 @@
+export const useIsFormModalOpen = () => useState<boolean>('isFormModalOpen', () => false)
