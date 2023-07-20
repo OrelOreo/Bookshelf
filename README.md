@@ -10,7 +10,7 @@ See all the books that you and others users added
 - JS
 - Typescript
 - Tailwind
-- Nuxt 3
+- Vue 3
 
 ## TESTS
 
