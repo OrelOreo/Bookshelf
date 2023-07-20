@@ -1,5 +1,3 @@
-[![forthebadge](https://forthebadge.com/images/badges/fuck-it-ship-it.svg)](https://forthebadge.com)
-
 # Bookshelf : a book app
 
 See all the books that you and others users added
