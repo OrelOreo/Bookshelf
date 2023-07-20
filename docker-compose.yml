@@ -10,6 +10,7 @@ services:
     ports:
       - 3001:3000
     environment:
+      - SECRET_TOKEN={SECRET_TOKEN}
       - MONGO_URL=${MONGO_URL}
     depends_on:
       - mongo 

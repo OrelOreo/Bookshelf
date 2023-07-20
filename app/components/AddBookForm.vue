@@ -5,7 +5,7 @@
   >
     <button
       type="button"
-      @click="isFormModalOpen = false"
+      @click="isFormModalOpen = !isFormModalOpen"
       class="absolute top-1 right-1 w-10 h-10 bg-red-600 text-white"
     >
       X

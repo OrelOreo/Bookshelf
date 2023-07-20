@@ -6,7 +6,6 @@ const SECRET_TOKEN = process.env.SECRET_TOKEN
 
 
 exports.signup = async (req, res) => {
-    // Récup password & hashing
     try {
         const hashedPassword = await bcrypt.hash(req.body.password,  10)
         const user = new User({
