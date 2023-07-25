@@ -3,7 +3,7 @@ const mongoose = require('mongoose')
 const schema =  mongoose.Schema({
     username: { type: String, required: true },
     comment: { type: String, required: true },
-}, { _id: false })
+}, { _id: false, timestamps: true, versionKey: false })
 
 const bookSchema = mongoose.Schema({
     userId: { type: String, required: true },
@@ -14,6 +14,6 @@ const bookSchema = mongoose.Schema({
     description: { type: String },
     comments: { type: [schema], default: [] },
     note: { type: Number }
-})
+}, { timestamps: true, versionKey: false })
 
 module.exports = mongoose.model('Book', bookSchema)

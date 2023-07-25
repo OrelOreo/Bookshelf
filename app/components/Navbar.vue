@@ -1,9 +1,10 @@
 <template>
     <div>
-        <nav class="flex items-center justify-end bg-gray-800 p-4">
+        <nav class="flex items-center justify-end bg-gray-800 p-4 relative">
+            <NuxtLink class="absolute left-6 top-3.5 text-white font-serif text-xl cursor-pointer" to="/">Bookshelf</NuxtLink>
             <NuxtLink v-if="!authStore.userToken" class="text-white hover:text-gray-300 mr-2" to="/login">Login</NuxtLink>
-            <NuxtLink v-if="!authStore.userToken" class="text-white hover:tqext-gray-300 mr-2" to="/signup">Sign up</NuxtLink>
-            <p @click="logout" class="text-white hover:text-gray-300 cursor-pointer">Log out</p>
+            <NuxtLink v-if="!authStore.userToken" class="text-white hover:text-gray-300 mr-2" to="/signup">Sign up</NuxtLink>
+            <button @click="logout" class="text-white hover:text-gray-300 cursor-pointer">Log out</button>
         </nav>
     </div>
 </template>

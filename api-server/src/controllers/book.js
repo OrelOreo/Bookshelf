@@ -72,7 +72,7 @@ exports.modifyBook = async (req, res) => {
       new: true,
     });
 
-    return res.status(200).json({ message: "Objet modifié" });
+    return res.status(200).json(updatedBook);
   } catch (error) {
     return res.status(400).json({ error });
   }
@@ -82,7 +82,7 @@ exports.postCommentary = async (req, res) => {
   try {
     const newComment = req.body;
     await Book.updateOne({ _id: req.params.id }, { $push: { comments: newComment } });
-    res.status(201).json({ message: "Commentaire ajouté" });
+    res.status(201).json(newComment);
   } catch (error) {
     res.status(500).json({ error });
   }
