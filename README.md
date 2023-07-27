@@ -11,6 +11,8 @@ See all the books that you and others users added
 - Typescript
 - Tailwind
 - Vue 3
+- NodeJS
+- Express
 
 ## TESTS
 

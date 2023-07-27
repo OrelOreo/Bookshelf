@@ -9,7 +9,7 @@
           >Nom d'utilisateur</label
         >
         <input
-          v-model="state.username"
+          v-model="stateUser.username"
           name="username"
           id="username"
           class="border text-sm rounded-lg block w-full p-2.5 bg-gray-600 border-gray-500 placeholder-gray-400 text-white"
@@ -22,7 +22,7 @@
           >Email</label
         >
         <input
-          v-model="state.email"
+          v-model="stateUser.email"
           type="email"
           name="email"
           id="email"
@@ -38,7 +38,7 @@
           >Mot de passe</label
         >
         <input
-          v-model="state.password"
+          v-model="stateUser.password"
           type="password"
           name="password"
           id="password"
@@ -66,6 +66,7 @@
 <script setup lang="ts">
 import { useAuthStore } from "~/store/auth";
 import { computed, reactive } from "vue";
+import IUserInformations from "~/types/Interfaces/UserInformations"
  
 const tokenCookie = useCookie("tokenCookie");
 const config = useRuntimeConfig();
@@ -76,13 +77,7 @@ const props = defineProps({
   login: { type: Boolean },
 });
 
-interface State {
-  email: string;
-  password: string;
-  username: string;
-}
-
-const state: State = reactive({
+const stateUser: IUserInformations = reactive({
   email: "",
   password: "",
   username: "",
@@ -101,8 +96,8 @@ async function login() {
       {
         method: "POST",
         body: {
-          email: state.email,
-          password: state.password,
+          email: stateUser.email,
+          password: stateUser.password,
         },
       }
     );
@@ -123,9 +118,9 @@ async function signup() {
     await $fetch(`${config.public.API_SERVER}/api/auth/signup`, {
       method: "POST",
       body: {
-        username: state.username,
-        email: state.email,
-        password: state.password,
+        username: stateUser.username,
+        email: stateUser.email,
+        password: stateUser.password,
       },
     });
     router.replace("/login");

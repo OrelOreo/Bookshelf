@@ -78,6 +78,7 @@ import { useIsFormModalOpen } from "~/composables/state";
 import { useAuthStore } from "~/store/auth";
 import { useBooksStore } from "~/store/books";
 import { reactive } from "vue"
+import IBook from "~/types/Interfaces/Book";
 
 const config = useRuntimeConfig()
 const bookStore = useBooksStore();
@@ -87,20 +88,6 @@ let isFormModalOpen = useIsFormModalOpen();
 const props = defineProps({
   idObject: { type: String },
 });
-
-interface Book {
-    _id: string
-    name: string
-    userId: string
-    username: string
-    image: any
-    description: string
-    category: string
-    comments: Array<Comment>
-    note: number
-    createdAt: string
-    updatedAt: string
-}
 
 const defaultState = () => ({
   bookName: '',
@@ -157,7 +144,7 @@ const submitForm = async () => {
         },
       });
       const responseData = await response.json()
-      const book: Book = {
+      const book: IBook = {
         _id: responseData.savedBook._id,
         name: responseData.savedBook.name,
         userId: responseData.savedBook.userId,
