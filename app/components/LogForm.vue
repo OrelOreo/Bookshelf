@@ -66,9 +66,8 @@
 <script setup lang="ts">
 import { useAuthStore } from "~/store/auth";
 import { computed, reactive } from "vue";
-import IUserInformations from "~/types/Interfaces/UserInformations"
- 
-const tokenCookie = useCookie("tokenCookie");
+import IUserInformations from "~/types/Interfaces/UserInformations";
+
 const config = useRuntimeConfig();
 const router = useRouter();
 const authStore = useAuthStore();
@@ -87,7 +86,7 @@ const isFromLoginOrSignup = computed(() => {
   return props.login ? "Se connecter" : "S'inscrire";
 });
 
-const postFormLog = () => props.login ? login() : signup()
+const postFormLog = () => (props.login ? login() : signup());
 
 async function login() {
   try {
@@ -101,7 +100,7 @@ async function login() {
         },
       }
     );
-    tokenCookie.value = response.token;
+    localStorage.setItem("token", response.token);
     authStore.pushUserInformations(
       response.userId,
       response.username,
@@ -128,5 +127,4 @@ async function signup() {
     console.log(error);
   }
 }
-
 </script>

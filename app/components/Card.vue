@@ -1,6 +1,6 @@
 <template>
   <div class="w-1/5 border rounded-lg shadow bg-gray-800 border-gray-700 my-5">
-    <NuxtLink :to="`${props.book._id}`">
+    <NuxtLink :to="`books/${props.book._id}`">
       <img
         class="rounded-t-lg object-cover h-60 w-full"
         :src="`${props.book.image}`"

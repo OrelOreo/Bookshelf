@@ -7,7 +7,7 @@ export const useAuthStore = defineStore('authStore', {
         userToken: '',
     }),
     actions: {
-        pushUserInformations(id: string, name: string, token: string) {
+        async pushUserInformations(id: string, name: string, token: string) {
             this.userId = id,
             this.username = name,
             this.userToken = token

@@ -1,11 +1,11 @@
 <template>
   <div class="relative">
-    <h1 class="text-center text-5xl">The books</h1>
+    <h1 class="text-center text-5xl">Les livres</h1>
     <button
       @click="isFormModalOpen = true"
       class="bg-gray-800 p-4 text-white hover:bg-gray-300 hover:text-gray-800 block m-auto my-4 rounded-md"
     >
-      Ajouter un book
+      Ajouter un livre
     </button>
     <div
       class="flex flex-col items-center"
