@@ -16,10 +16,10 @@
         >
           {{ book.name }}
         </h5>
-        <p class="mb-3   text-gray-400">
+        <p class="mb-3 text-gray-400">
           {{ book.description }}
         </p>
-        <p class="mb-3   text-gray-400">
+        <p class="mb-3 text-gray-400">
           {{ book.category }}
         </p>
         <p class="text-gray-400">{{ bookCreatedDate }}</p>
@@ -30,16 +30,16 @@
             v-for="n in book.note"
             :key="n"
             src="~/assets/star.png"
-            alt="rating image"
+            alt="rating star"
             class="h-5 w-5 mr-1"
           />
         </div>
         <div v-if="book.userId === id">
           <button
             @click="isFormModalOpen = true"
-            class="focus:outline-none focus:ring-4 font-medium rounded-lg text-sm px-4 py-2 bg-gray-800 text-white border border-white hover:bg-gray-700 hover:border-gray-600 focus:ring-gray-700 mr-2"
+            class="focus:outline-none focus:ring-4 font-medium rounded-lg text-sm px-4 py-2 bg-gray-800 text-white border border-[#8075FF] hover:bg-[#6356f1] hover:border-[#6356f1] focus:[#6356f1] mr-2"
           >
-            Edit
+            Modifier
           </button>
           <button
             @click="deleteBook"
@@ -50,6 +50,7 @@
         </div>
       </div>
     </div>
+    <button @click="addToFavorites" class="bg-[#8075FF] hover:bg-[#6356f1] rounded-xl py-3 px-4 text-white block mx-auto mt-4">Ajouter ce livre dans mes favoris</button>
     <div
       v-if="isFormModalOpen"
       class="fixed bottom-0 left-0 top-0 right-0 h-full z-30 bg-black opacity-60"
@@ -60,10 +61,21 @@
     >
       <AddBookForm :idObject="route.params.id" />
     </div>
-    <div class="w-1/5 mx-auto mt-5" v-if="bookStore.books[indexBook].comments.length > 0">
-      <h3 class="font-bold mb-2">Commentaires ({{ bookStore.books[indexBook].comments.length }}) :</h3>
-      <div class="bg-gray-700 rounded-lg p-3 mb-2" v-for="comment in bookStore.books[indexBook].comments">
-        <h3 class="font-bold text-white">{{ comment.username }} <span class="text-gray-400">{{ comment.createdAt }}</span></h3>
+    <div
+      class="w-1/5 mx-auto mt-5"
+      v-if="bookStore.books[indexBook].comments.length > 0"
+    >
+      <h3 class="font-bold mb-2">
+        Commentaires ({{ bookStore.books[indexBook].comments.length }}) :
+      </h3>
+      <div
+        class="bg-gray-700 rounded-lg p-3 mb-2"
+        v-for="comment in bookStore.books[indexBook].comments"
+      >
+        <h3 class="font-bold text-white">
+          {{ comment.username }}
+          <span class="text-gray-400">{{ comment.createdAt }}</span>
+        </h3>
         <p class="text-gray-300">{{ comment.comment }} !</p>
       </div>
     </div>
@@ -82,7 +94,7 @@
       ></textarea>
       <button
         type="submit"
-        class="text-white bg-gray-800 hover:bg-gray-600 border-gray-700 py-2 px-4 mt-1 rounded-md block ml-auto"
+        class="text-white bg-gray-700 hover:bg-gray-600 border-gray-700 py-2 px-4 mt-1 rounded-md block ml-auto"
       >
         Enregistrer
       </button>
@@ -106,8 +118,8 @@ const route = useRoute();
 const router = useRouter();
 
 const book = ref(null);
-let bookCreatedDate:string;
-let commentCreatedDate:string;
+let bookCreatedDate: string;
+let commentCreatedDate: string;
 
 const bookCommentary = ref(null);
 
@@ -123,7 +135,7 @@ async function fetchBook() {
     `${config.public.API_SERVER}/api/books/${route.params.id}`
   );
   book.value = await data.json();
-  bookCreatedDate = new Date(book.value.createdAt).toLocaleDateString()
+  bookCreatedDate = new Date(book.value.createdAt).toLocaleDateString();
 }
 
 const deleteBook = async () => {
@@ -160,13 +172,29 @@ const postCommentary = async () => {
         body: requestBody,
       }
     );
-    // commentCreatedDate = 
     bookStore.books[indexBook].comments.push(requestBody);
     bookCommentary.value = "";
   } catch (error) {
     console.log(error);
   }
 };
+
+const addToFavorites = async () => {
+  try {
+    await $fetch(`${config.public.API_SERVER}/api/books/users/${id}/favorites/${route.params.id}`, {
+      method: "POST",
+      headers: {
+        Authorization: `Bearer ${token}`
+      },
+      body: {
+        userId: id,
+        bookId: route.params.id
+      }
+    })
+  } catch (error) {
+    console.log(error)
+  }
+}
 
 onMounted(fetchBook);
 </script>

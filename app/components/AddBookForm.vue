@@ -18,7 +18,7 @@
         v-model="state.bookName"
         type="text"
         id="nom-livre"
-        class="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-blue-500 focus:border-blue-500"
+        class="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-[#8075FF] focus:border-[#8075FF]"
       />
     </div>
     <div class="mb-4">
@@ -28,7 +28,7 @@
       <textarea
         v-model="state.bookDescription"
         id="description-livre"
-        class="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-blue-500 focus:border-blue-500"
+        class="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-[#8075FF] focus:border-[#8075FF]"
       ></textarea>
     </div>
     <div class="mb-4">
@@ -39,7 +39,7 @@
         v-model="state.bookCategory"
         type="text"
         id="categorie-livre"
-        class="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-blue-500 focus:border-blue-500"
+        class="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-[#8075FF] focus:border-[#8075FF]"
       />
     </div>
     <div class="mb-4">
@@ -50,7 +50,7 @@
         v-model="state.bookNote"
         type="number"
         id="note-livre"
-        class="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-blue-500 focus:border-blue-500"
+        class="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-[#8075FF] focus:border-[#8075FF]"
       />
     </div>
     <div class="mb-4">
@@ -61,12 +61,12 @@
         @change="addImage"
         type="file"
         id="fichier-livre"
-        class="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-blue-500 focus:border-blue-500"
+        class="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-[#8075FF] focus:border-[#8075FF]"
       />
     </div>
     <button
       type="submit"
-      class="bg-gray-800 hover:bg-gray-600 border-gray-700 text-white py-2 px-4 rounded-md"
+      class="bg-[#8075FF] hover:bg-[#6356f1]  text-white py-2 px-4 rounded-md"
     >
       Enregistrer
     </button>

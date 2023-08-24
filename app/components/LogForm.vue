@@ -53,6 +53,7 @@
       >
         {{ isFromLoginOrSignup }}
       </button>
+      <p v-if="errMsg" class="text-red-600">{{ errMsg }}</p>
       <div v-if="props.login" class="text-sm font-medium text-gray-300">
         Pas encore inscrit ?
         <NuxtLink to="/signup" class="hover:underline text-blue-500">
@@ -65,7 +66,7 @@
 
 <script setup lang="ts">
 import { useAuthStore } from "~/store/auth";
-import { computed, reactive } from "vue";
+import { computed, reactive, ref } from "vue";
 import IUserInformations from "~/types/Interfaces/UserInformations";
 
 const config = useRuntimeConfig();
@@ -76,11 +77,14 @@ const props = defineProps({
   login: { type: Boolean },
 });
 
+const errMsg = ref('')
+
 const stateUser: IUserInformations = reactive({
   email: "",
   password: "",
   username: "",
 });
+
 
 const isFromLoginOrSignup = computed(() => {
   return props.login ? "Se connecter" : "S'inscrire";
@@ -108,6 +112,10 @@ async function login() {
     );
     router.replace("/");
   } catch (error) {
+      errMsg.value = "Identifiant ou mot de passe incorrecte"
+      setTimeout(() => {
+        errMsg.value = ''
+      }, 2000)
     console.log(error);
   }
 }

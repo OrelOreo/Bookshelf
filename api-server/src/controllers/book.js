@@ -1,4 +1,6 @@
 const Book = require("../models/Book");
+const User = require('../models/User')
+const FavoriteBook = require("../models/FavoriteBooks")
 const fs = require("fs").promises;
 const path = require("path");
 
@@ -16,6 +18,34 @@ exports.createOneBook = async (req, res) => {
     res.status(400).json({ error });
   }
 };
+
+exports.addBookToFavorites = async (req, res) => {
+  try {
+    const { userId, bookId } = req.params
+    const user = await User.findById(userId)
+    
+    if(!user) {
+      return res.status(404).json({ error: "Utilisateur introuvable" })
+    }
+    const book = await Book.findById(bookId)
+    if(!book) {
+      return res.status(404).json({ error: "Livre introuvable" })
+    }
+
+    const existingFavorite = await FavoriteBook.findOne({ user: userId, book: bookId })
+    if(existingFavorite) {
+      return res.status(400).json({ error: "Le livre est déjà dans les favoris" })
+    }
+
+    const newFavorite = new FavoriteBook({ user: userId, book: bookId })
+    await newFavorite.save()
+
+    res.status(200).json({ message: "Lirve ajouté aux favoris" })
+  } catch (error) {
+    console.error(error)
+    res.status(500).json({ error: "Une erreur est survenue" })
+  }
+}
 
 exports.getAllBooks = async (req, res) => {
   try {

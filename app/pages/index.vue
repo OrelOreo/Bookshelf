@@ -1,18 +1,14 @@
 <template>
   <div class="relative">
-    <h1 class="text-center text-5xl">Les livres</h1>
+    <h1 class="text-center text-5xl mt-4">Les livres</h1>
     <button
       @click="isFormModalOpen = true"
-      class="bg-gray-800 p-4 text-white hover:bg-gray-300 hover:text-gray-800 block m-auto my-4 rounded-md"
+      class="bg-[#8075FF] hover:bg-[#6356f1] p-4 text-white font-semibold block m-auto my-4 rounded-md"
     >
       Ajouter un livre
     </button>
-    <div
-      class="flex flex-col items-center"
-      v-if="bookStore.books"
-      v-for="book in bookStore.books"
-    >
-      <Card :book="book" />
+    <div class="flex flex-wrap w-4/5 justify-center m-auto">
+        <Card v-if="bookStore.books" v-for="book in bookStore.books" :book="book" class="mx-4" />
     </div>
     <div
       v-if="isFormModalOpen"

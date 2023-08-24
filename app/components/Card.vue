@@ -19,6 +19,15 @@
         <p class="mb-3 font-normal text-gray-700 dark:text-gray-400">
           {{ props.book.category }}
         </p>
+        <div class="flex">
+          <img
+            v-for="n in book.note"
+            :key="n"
+            src="~/assets/star.png"
+            alt="rating star"
+            class="h-5 w-5 mr-1"
+          />
+        </div>
       </div>
     </NuxtLink>
   </div>
@@ -28,4 +37,5 @@
 const props = defineProps({
   book: { type: Object },
 });
+console.log(props.book)
 </script>

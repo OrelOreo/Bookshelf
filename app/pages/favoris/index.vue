@@ -1,6 +1,6 @@
 <template>
     <div>
-        <h1>Your favorites books</h1>
+        <h1 class="text-center text-5xl mt-4">Vos livres favoris</h1>
     </div>
 </template>
 

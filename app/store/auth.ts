@@ -7,10 +7,14 @@ export const useAuthStore = defineStore('authStore', {
         userToken: '',
     }),
     actions: {
-        async pushUserInformations(id: string, name: string, token: string) {
+         pushUserInformations(id: string, name: string, token: string) {
             this.userId = id,
             this.username = name,
             this.userToken = token
+        },
+        initializePersistedData() {
+            const persistedToken = localStorage.getItem('token')
+            persistedToken ? this.userToken = persistedToken : ''
         }
-    }
+    },
 })
