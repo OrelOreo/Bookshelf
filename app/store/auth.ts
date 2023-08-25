@@ -13,8 +13,9 @@ export const useAuthStore = defineStore('authStore', {
             this.userToken = token
         },
         initializePersistedData() {
-            const persistedToken = localStorage.getItem('token')
-            persistedToken ? this.userToken = persistedToken : ''
+            this.userToken = localStorage.getItem('userToken') ?? ''
+            this.userId = localStorage.getItem('userId') ?? ''
+            this.username = localStorage.getItem('username') ?? ''
         }
     },
 })

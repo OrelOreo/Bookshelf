@@ -9,6 +9,8 @@ router.get('/:id', bookControllers.getOneBook)
 router.put('/:id', auth, multer, bookControllers.modifyBook)
 router.post('/', auth, multer, bookControllers.createOneBook)
 router.post('/users/:userId/favorites/:bookId', auth, bookControllers.addBookToFavorites)
+router.get('/users/:userId/favorites', auth, bookControllers.getAllFavoriteBooks)
+router.delete('/users/:userId/favorites', auth, bookControllers.removeFavoriteBook)
 router.post('/:id/commentary', auth, bookControllers.postCommentary)
 router.delete('/:id', auth, bookControllers.deleteBook)
 

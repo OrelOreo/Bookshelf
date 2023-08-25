@@ -17,10 +17,12 @@ import { useAuthStore } from '~/store/auth';
 const authStore = useAuthStore()
 
 const logout = () => {
-    localStorage.removeItem('token')
-    authStore.userId = ''
-    authStore.userToken = ''
-    authStore.username = ''
+    const dataInStorageToRemove = ['userToken', 'userId', 'username']
+
+    dataInStorageToRemove.forEach(data => {
+        localStorage.removeItem(data)
+        authStore[data] = ''
+    })
 } 
 
 </script>

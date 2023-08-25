@@ -4,6 +4,7 @@ import IBook from "~/types/Interfaces/Book"
 export const useBooksStore = defineStore('booksStore', {
     state: () => ({
         books: [] as IBook[],
+        favoriteBooks: [] as IBook[]
     }),
 
     actions: {

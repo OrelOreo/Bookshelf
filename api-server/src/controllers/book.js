@@ -42,8 +42,45 @@ exports.addBookToFavorites = async (req, res) => {
 
     res.status(200).json({ message: "Lirve ajouté aux favoris" })
   } catch (error) {
-    console.error(error)
     res.status(500).json({ error: "Une erreur est survenue" })
+  }
+}
+
+exports.getAllFavoriteBooks = async (req, res) => {
+  try {
+    const { userId } = req.params
+    const user = await User.findById(userId)
+    if (!user) {
+      return res.status(404).json({ error: "Utilisateur introuvable" })
+    }
+    if (userId !== req.auth.userId) {
+      return res.status(403).json({ message: "Requête non autorisée" });
+    }
+    const favorites = await FavoriteBook.find({ user: userId }).populate('book')
+    
+    res.status(200).json(favorites)
+  } catch (error) {
+    res.status(500).json({ error })
+  } 
+}
+
+exports.removeFavoriteBook = async (req, res) => {
+  try {
+    // Simplifier ce code..
+    // req.auth.userId
+    // await favoriteBookToRemove.deleteOne({ _id: req.params.bookId })
+    console.log('req.auth', req.auth)
+    console.log('req.params', req.params)
+    const favoriteBookToRemove = await FavoriteBook.findOne({ _id: req.params.bookId })
+    console.log("favoriteBookToRemove", favoriteBookToRemove)
+    if (req.params.userId !== req.auth.userId || req.params.userId !== favoriteBookToRemove.user) {
+      return res.status(403).json({ message: "Requête non autorisée" });
+    }
+    await favoriteBookToRemove.deleteOne({ _id: req.params.bookId })
+    res.status(200).json({ message: "Objet supprimé" });
+
+  } catch (error) {
+    res.status(500).json({ error })
   }
 }
 

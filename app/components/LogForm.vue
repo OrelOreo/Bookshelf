@@ -104,7 +104,9 @@ async function login() {
         },
       }
     );
-    localStorage.setItem("token", response.token);
+    localStorage.setItem("userToken", response.token);
+    localStorage.setItem("userId", response.userId)
+    localStorage.setItem("username", response.username)
     authStore.pushUserInformations(
       response.userId,
       response.username,

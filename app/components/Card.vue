@@ -30,12 +30,22 @@
         </div>
       </div>
     </NuxtLink>
+    <button
+      v-if="props.favorite"
+      @click="$emit('removeFromFavoriteBooks', props.favBookId)"
+      class="focus:outline-none text-white focus:ring-4 font-medium rounded-lg text-sm px-4 py-2 bg-red-600 hover:bg-red-700 focus:ring-red-900"
+    >
+      X
+    </button>
   </div>
 </template>
 
 <script setup lang="ts">
+
+defineEmits(['removeFromFavoriteBooks'])
 const props = defineProps({
   book: { type: Object },
+  favBookId: { type: String },
+  favorite: { type: Boolean },
 });
-console.log(props.book)
 </script>
