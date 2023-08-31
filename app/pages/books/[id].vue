@@ -119,7 +119,7 @@ const router = useRouter();
 
 const book = ref(null);
 let bookCreatedDate: string;
-let commentCreatedDate: string;
+// let commentCreatedDate: string;
 
 const bookCommentary = ref(null);
 

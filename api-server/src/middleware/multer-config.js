@@ -5,10 +5,9 @@ const MIME_TYPES = {
     "image/jpeg": "jpg",
     "image/png": "png"
 }
-
-const storage = multer.diskStorage({
+const mconfig = (directory) => multer.diskStorage({
     destination: (req, file, callback) => {
-        callback(null, "images")
+        callback(null, directory)
     },
     filename: (req, file, callback) => {
         const fileName = file.originalname
@@ -18,4 +17,8 @@ const storage = multer.diskStorage({
     }
 })
 
-module.exports = multer({storage: storage}).single('image')
+
+module.exports = {
+    uploadBookImage: multer({ storage: mconfig('images') }).single('image'),
+    uploadAvatar: multer({ storage: mconfig('avatars') }).single('image')
+}

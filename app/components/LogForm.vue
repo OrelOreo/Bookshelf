@@ -5,6 +5,7 @@
     <form @submit.prevent="postFormLog" class="space-y-6">
       <h5 class="text-xl font-medium text-white">{{ isFromLoginOrSignup }}</h5>
       <div v-if="!props.login">
+        <input type="file" @change="addImage" />
         <label for="username" class="block mb-2 text-sm font-medium text-white"
           >Nom d'utilisateur</label
         >
@@ -84,13 +85,19 @@ const stateUser: IUserInformations = reactive({
   password: "",
   username: "",
 });
-
+let userImage = null
 
 const isFromLoginOrSignup = computed(() => {
   return props.login ? "Se connecter" : "S'inscrire";
 });
 
 const postFormLog = () => (props.login ? login() : signup());
+
+function addUserInformationsToStorage(userInfos: Object) {
+  for (const [key, value] of Object.entries(userInfos)) {
+    localStorage.setItem(key, value)
+  }
+}
 
 async function login() {
   try {
@@ -104,13 +111,18 @@ async function login() {
         },
       }
     );
-    localStorage.setItem("userToken", response.token);
-    localStorage.setItem("userId", response.userId)
-    localStorage.setItem("username", response.username)
+    const userInfos = {
+      userToken: response.token,
+      userId: response.userId,
+      username: response.username,
+      userImage: response.image
+    }
+    addUserInformationsToStorage(userInfos)
     authStore.pushUserInformations(
       response.userId,
       response.username,
-      response.token
+      response.token,
+      response.image
     );
     router.replace("/");
   } catch (error) {
@@ -122,15 +134,20 @@ async function login() {
   }
 }
 
+const addImage = (e: Event) => {
+  userImage = (<HTMLInputElement>e.target).files[0];
+};
+
 async function signup() {
   try {
+    const formData = new FormData()
+    formData.append("email", stateUser.email)
+    formData.append("username", stateUser.username)
+    formData.append("password", stateUser.password)
+    formData.append("image", userImage)
     await $fetch(`${config.public.API_SERVER}/api/auth/signup`, {
       method: "POST",
-      body: {
-        username: stateUser.username,
-        email: stateUser.email,
-        password: stateUser.password,
-      },
+      body: formData
     });
     router.replace("/login");
   } catch (error) {

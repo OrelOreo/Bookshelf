@@ -24,6 +24,7 @@ const start = async() => {
     app.use('/api/auth', userRoutes)
     app.use('/api/books', bookRoutes)
     app.use('/images', express.static(path.join('images')))
+    app.use('/avatars', express.static(path.join('avatars')))
     if (process.env.NODE_ENV !== 'test') {
         const server = app.listen(port, () => resolve(server))
       } else {

@@ -11,7 +11,7 @@
         :favorite="favorite"
         class="mx-4"
       />
-      <span v-else class="mt-6 text-lg">Vous n'avez aucun livre dans vos favoris :/</span>
+      <span v-else class="mt-6 text-lg">Vous n'avez aucun livre dans vos favoris 😕</span>
     </div>
   </div>
 </template>

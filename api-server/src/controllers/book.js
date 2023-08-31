@@ -69,10 +69,7 @@ exports.removeFavoriteBook = async (req, res) => {
     // Simplifier ce code..
     // req.auth.userId
     // await favoriteBookToRemove.deleteOne({ _id: req.params.bookId })
-    console.log('req.auth', req.auth)
-    console.log('req.params', req.params)
     const favoriteBookToRemove = await FavoriteBook.findOne({ _id: req.params.bookId })
-    console.log("favoriteBookToRemove", favoriteBookToRemove)
     if (req.params.userId !== req.auth.userId || req.params.userId !== favoriteBookToRemove.user) {
       return res.status(403).json({ message: "Requête non autorisée" });
     }
